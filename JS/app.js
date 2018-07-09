@@ -83,13 +83,12 @@ function winGame(){
 
  function init(){
   // timer 
-  let minutes = 0;
-  let seconds =0; 
-  let timer;
-function startTimer (){
-  setInterval(function(){
-    seconds +=1;
-  }, 1000);
+
+    let timer = newTimer();
+timer.start();
+timer.addEventListener('secondsUpdated', function (e) {
+    $('#basicUsage').html(timer.getTimeValues().toString());
+});
 }
 
 
