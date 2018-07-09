@@ -74,7 +74,12 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
   });
 });
 
-
+function winGame(){
+  if (openCard.length==16){
+    stop();
+    console.log (congrats);
+  }
+}
 
  function init(){
   // timer 
