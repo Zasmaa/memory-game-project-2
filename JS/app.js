@@ -95,6 +95,18 @@ function startTimer (){
 
 
  }
+function countingMoves(){
+    moves ++;
+    counter.innerHTML = moves;
+     if (move > 10){
+    let star = document.querySelector('.fa fa-star"');
+    star.classList.remove(star);
+  }
+  else if (move >15){
+    let star = document.querySelector('.fa fa-star"');
+    star.classList.remove(star);
+  }
+   }
 
 init();
 
