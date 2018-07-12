@@ -81,18 +81,18 @@ function addMove(){
      
 init();
   
-// timer 
 function startTimer (){
 let vTimer = setInterval(countTimer, 1000);
    let seconds = 0;
-   function countTimer(){
+   let minutes = 0;
    let time = document.querySelector('.timer');
-    let s = time();
+   function countTimer(){
+    let s = time
     ++s
-    let hour = math.floor(s/3600);
-    let minute = math.floor((s -hour*3600)/60);
-    let seconds =s-(hour*3600 + minutes*60);
-    document.querySelector('.timer').innerHTML = hour + ":" + minute + ":" + seconds;
+    let hour = Math.floor(s/3600);
+    let Minute = Math.floor((s -hour*3600)/60);
+    let Seconds =s-(hour*3600 + minutes*60);
+    document.querySelector('.timer').innerHTML = hour + ":" + minutes + ":" + seconds;
    }
 
    }
