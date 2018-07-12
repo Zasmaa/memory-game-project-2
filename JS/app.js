@@ -25,7 +25,6 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-cube","fa-cube",];
  moves =0
 scorePanel = []
-firstCard = [];
  openCard = [];
  
 
@@ -40,11 +39,8 @@ deck.innerHTML = cards;
 }
 
 
-
-
- 
-
-let aCards = document.querySelectorAll('.card');
+ function init(){
+  let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
@@ -52,10 +48,6 @@ aCards.forEach(function(card){
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
       card.classList.add('open','show');
-
-
-
-
     
   if (opCard.length == 2){
 //matched cards 
@@ -74,38 +66,37 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
   });
 });
 
-function winGame(){
-  if (openCard.length==16){
-    stop();
-    console.log (congrats);
-  }
+addMove(); 
+ startTimer();
+    
+
 }
 
- function init(){
-  // timer 
-
-    let timer = newTimer();
-timer.start();
-timer.addEventListener('secondsUpdated', function (e) {
-    $('#basicUsage').html(timer.getTimeValues().toString());
-});
+//count moves
+moves = 0;
+function addMove(){
+  moves++;
+  addMove.innerHTML = moves;
 }
-
-
-
- }
-function countingMoves(){
-    moves ++;
-    counter.innerHTML = moves;
-     if (move > 10){
-    let star = document.querySelector('.fa fa-star"');
-    star.classList.remove(star);
-  }
-  else if (move >15){
-    let star = document.querySelector('.fa fa-star"');
-    star.classList.remove(star);
-  }
+     
+init();
+  
+// timer 
+function startTimer (){
+let vTimer = setInterval(countTimer, 1000);
+   let seconds = 0;
+   function countTimer(){
+   let time = document.querySelector('.timer');
+    let s = time();
+    ++s
+    let hour = math.floor(s/3600);
+    let minute = math.floor((s -hour*3600)/60);
+    let seconds =s-(hour*3600 + minutes*60);
+    document.querySelector('.timer').innerHTML = hour + ":" + minute + ":" + seconds;
    }
 
-init();
+   }
+   function stopTimer(){
+  clearInterval(timer);
+}
 
