@@ -47,7 +47,7 @@ aCards.forEach(function(card){
 //opened card
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
-      card.classList.add('open','show');
+      card.classList.add('open','show', 'disabled');
     
   if (opCard.length == 2){
 //matched cards 
@@ -58,7 +58,7 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
-                card.classList.remove('open','show');
+                card.classList.remove('open','show', 'disabled');
       });
           opCard = [];
     },1000);
