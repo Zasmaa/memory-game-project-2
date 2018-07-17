@@ -28,8 +28,9 @@ scorePanel = []
  openCard = [];
  
 
-// shuffle cards 
-const shuffleCard = shuffle(dIcons);
+function init(){
+   // shuffle cards
+ const shuffleCard = shuffle(dIcons);
   //make cards 
   let cards = "";
  for (let card of dIcons){
@@ -37,10 +38,10 @@ let deck = document.querySelector('.deck');
 cards += `<li class ='card'><i class= 'fa ${card}'></i></li>`;
 deck.innerHTML = cards;
 }
-
-
- function init(){
-  let aCards = document.querySelectorAll('.card');
+}
+  
+ init();
+let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
@@ -50,6 +51,7 @@ if (!card.classList.contains('open') && !card.classList.contains('show') && !car
       card.classList.add('open','show', 'disabled');
     
   if (opCard.length == 2){
+   adMoves();
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
@@ -66,17 +68,13 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
   });
 });
 
-addMove(); 
- startTimer();
-    
-
-}
-
 //count moves
+countMoves= document.querySelector('.moves');
 moves = 0;
 function addMove(){
-  moves++;
-  addMove.innerHTML = moves;
+moves++;
+ countMoves.innerHTML = moves;
+
 }
      
 init();
