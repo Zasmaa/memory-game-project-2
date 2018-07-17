@@ -99,4 +99,14 @@ let vTimer = setInterval(countTimer, 1000);
    function stopTimer(){
   clearInterval(timer);
 }
+let restartButton = document.querySelector('.restart');
+restartButton.addEventListener('click', function(e){
+  let cards = "";
+  const shuffleCard = shuffle(dIcons);
+  countMoves.innerHTML ="";
+  let opCard = [];
+  init();
+
+
+});
 
