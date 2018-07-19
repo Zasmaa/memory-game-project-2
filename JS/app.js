@@ -38,30 +38,38 @@ let deck = document.querySelector('.deck');
 cards += `<li class ='card'><i class= 'fa ${card}'></i></li>`;
 deck.innerHTML = cards;
 }
-}
-  
- init();
 let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
+
 //opened card
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
       card.classList.add('open','show', 'disabled');
     
   if (opCard.length == 2){
-   adMoves();
+    //start counts moves 
+     addMove();
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
   opCard[1].classList.add('match');
 }
+
+// all cards matched
+if (opCard.length==16){
+  
+   popupMessage();
+  
+}
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
                 card.classList.remove('open','show', 'disabled');
+
       });
+
           opCard = [];
     },1000);
   }
@@ -72,34 +80,61 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
 countMoves= document.querySelector('.moves');
 moves = 0;
 function addMove(){
-moves++;
- countMoves.innerHTML = moves;
+  moves++;
+  countMoves.innerHTML = moves;
+
+  //starts
+  changeStars();
+  //timer 
+  startTimer();
+
 
 }
-     
-init();
-  
+  //change stars
+  let rates= document.querySelector('.fa fa-star')
+  function changeStars(){
+    if (moves >2 ){
+      rates.style.visibility = "hidden";
+
+    } 
+    //else if (moves > 10){
+     //document.querySelector('.fa fa-star').style.display = 'none';
+    //}
+  } 
+
+// timer
+ 
 function startTimer (){
 let vTimer = setInterval(countTimer, 1000);
    let seconds = 0;
    let minutes = 0;
+   let hours=0;
    let time = document.querySelector('.timer');
-   function countTimer(){
-    let s = time
-    ++s
-    let hour = Math.floor(s/3600);
-    let Minute = Math.floor((s -hour*3600)/60);
-    let Seconds =s-(hour*3600 + minutes*60);
-    document.querySelector('.timer').innerHTML = hour + ":" + minutes + ":" + seconds;
+function countTimer(){
+   seconds++;
+   if(seconds ==60){
+    mintues++;
+    seconds =0;
    }
+    document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;
+   }
+     
+
 
    }
-   function stopTimer(){
+ 
+  function stopTimer(){
   clearInterval(timer);
 }
+}
+  
+  
+ init();
+  
+
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(e){
-  let cards = "";
+ let cards = "";
   const shuffleCard = shuffle(dIcons);
   countMoves.innerHTML ="";
   let opCard = [];
