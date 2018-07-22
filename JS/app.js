@@ -23,12 +23,13 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-bomb",  "fa-bomb", 
  "fa-anchor","fa-anchor", 
  "fa-cube","fa-cube",];
- moves =0
-scorePanel = []
- openCard = [];
- 
 
-function init(){
+scorePanel = []
+matched = [];
+ opCard = [];
+
+
+ function init(){
    // shuffle cards
  const shuffleCard = shuffle(dIcons);
   //make cards 
@@ -38,10 +39,16 @@ let deck = document.querySelector('.deck');
 cards += `<li class ='card'><i class= 'fa ${card}'></i></li>`;
 deck.innerHTML = cards;
 }
-let aCards = document.querySelectorAll('.card');
+ let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
+    // started timer 
+    let initialClick = false;
+if(initialClick=== false){
+  initialClick = true;
+  startTimer();
+}
 
 //opened card
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
@@ -51,6 +58,7 @@ if (!card.classList.contains('open') && !card.classList.contains('show') && !car
   if (opCard.length == 2){
     //start counts moves 
      addMove();
+     changeStars();
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
@@ -58,11 +66,7 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
 }
 
 // all cards matched
-if (opCard.length==16){
-  
-   popupMessage();
-  
-}
+
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
@@ -82,55 +86,53 @@ moves = 0;
 function addMove(){
   moves++;
   countMoves.innerHTML = moves;
-
-  //starts
-  changeStars();
-  //timer 
-  startTimer();
-
-
 }
   //change stars
-  let rates= document.querySelector('.fa fa-star')
+  let rates= document.querySelector('.stars')
+  let listStarts = document.querySelectorAll('.fa fa-star')
   function changeStars(){
-    if (moves >2 ){
-      rates.style.visibility = "hidden";
+    if (moves > 4 && moves < 10){  
+    document.getElementById('one').style.display = 'none'; 
 
     } 
-    //else if (moves > 10){
-     //document.querySelector('.fa fa-star').style.display = 'none';
-    //}
+
+    else if (moves > 11 && moves < 20){
+      document.getElementById('two').style.display = 'none'; 
+    }
+    else if ( moves > 35){
+       document.getElementById('last').style.display = 'none'; 
+    }
   } 
 
-// timer
- 
+// timer 
 function startTimer (){
-let vTimer = setInterval(countTimer, 1000);
-   let seconds = 0;
-   let minutes = 0;
-   let hours=0;
-   let time = document.querySelector('.timer');
+  let vTimer = setInterval(countTimer, 1000);
+  let hours =0;
+  let minutes =0;
+  let seconds =0;
+  let time = document.querySelector('.timer');
+  let initialClick = false;
 function countTimer(){
    seconds++;
    if(seconds ==60){
-    mintues++;
+    minutes++;
     seconds =0;
    }
     document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;
    }
      
 
-
    }
  
-  function stopTimer(){
+ function stopTimer(){
   clearInterval(timer);
+} 
+
 }
-}
-  
   
  init();
-  
+
+
 
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(e){
@@ -143,3 +145,38 @@ restartButton.addEventListener('click', function(e){
 
 });
 
+
+// used the  https://www.w3schools.com/howto/howto_css_modals.asp
+let modal = document.querySelector('.modal');
+
+function popupMessage(){
+  if (matched.length===16){
+ modal.style.display = 'block';
+ stopTimer();
+}
+
+}
+ let span = document.getElementsByClassName('close')[0];
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+// message inside the modal 
+let timecount = document.querySelector('.timer');
+ document.querySelector('.modal-timer').innerHTML = timecount;
+  let starRate = document.querySelector('.star');
+  document.querySelector('.modal-star').innerHTML = starRate;
+  let Cmoves = document.querySelector('.moves'); 
+  document.querySelector('.modal-moves').innerHTML = Cmoves
