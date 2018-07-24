@@ -59,13 +59,21 @@ if (!card.classList.contains('open') && !card.classList.contains('show') && !car
     //start counts moves 
      addMove();
      changeStars();
+
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
   opCard[1].classList.add('match');
+console.log ('matched');
 }
 
 // all cards matched
+if (matched.length === 8){
+swal('congratulations!','you have won the game',{
+button: 'replay',
+});
+  stopTimer();
+}
 
 // hide if it not match 
         setTimeout(function(){
@@ -79,7 +87,6 @@ if (opCard[0].innerHTML == opCard[1].innerHTML){
   }
   });
 });
-
 //count moves
 countMoves= document.querySelector('.moves');
 moves = 0;
@@ -125,6 +132,7 @@ function countTimer(){
    }
  
  function stopTimer(){
+  let timer = document.querySelector('.timer')
   clearInterval(timer);
 } 
 
@@ -144,39 +152,3 @@ restartButton.addEventListener('click', function(e){
 
 
 });
-
-
-// used the  https://www.w3schools.com/howto/howto_css_modals.asp
-let modal = document.querySelector('.modal');
-
-function popupMessage(){
-  if (matched.length===16){
- modal.style.display = 'block';
- stopTimer();
-}
-
-}
- let span = document.getElementsByClassName('close')[0];
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-// message inside the modal 
-let timecount = document.querySelector('.timer');
- document.querySelector('.modal-timer').innerHTML = timecount;
-  let starRate = document.querySelector('.star');
-  document.querySelector('.modal-star').innerHTML = starRate;
-  let Cmoves = document.querySelector('.moves'); 
-  document.querySelector('.modal-moves').innerHTML = Cmoves
