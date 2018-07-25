@@ -25,8 +25,9 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-cube","fa-cube",];
 
 scorePanel = []
-matched = [];
+matchedCard = [];
  opCard = [];
+moves = 0
 
 
  function init(){
@@ -47,7 +48,7 @@ aCards.forEach(function(card){
     let initialClick = false;
 if(initialClick=== false){
   initialClick = true;
-  startTimer();
+  countTimer();
 }
 
 //opened card
@@ -64,17 +65,11 @@ if (!card.classList.contains('open') && !card.classList.contains('show') && !car
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
   opCard[1].classList.add('match');
-console.log ('matched');
+matchedCard.push(opCard[0],opCard[1]);
 }
 
 // all cards matched
-if (matched.length === 8){
-swal('congratulations!','you have won the game',{
-button: 'replay',
-});
-  stopTimer();
-}
-
+isOver();
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
@@ -112,7 +107,6 @@ function addMove(){
   } 
 
 // timer 
-function startTimer (){
   let vTimer = setInterval(countTimer, 1000);
   let hours =0;
   let minutes =0;
@@ -127,15 +121,24 @@ function countTimer(){
    }
     document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;
    }
-     
-
-   }
- 
  function stopTimer(){
   let timer = document.querySelector('.timer')
-  clearInterval(timer);
-} 
+  clearInterval();    
 
+   } 
+
+function isOver(){
+  if (matchedCard.length === dIcons.length){
+
+ swal({
+  title: "Congratulations!",
+  text: 'do you want to play again ', 
+  icon: "success",
+});
+//clearInterval('timer'); 
+  stopTimer();
+}
+}
 }
   
  init();
@@ -147,6 +150,7 @@ restartButton.addEventListener('click', function(e){
  let cards = "";
   const shuffleCard = shuffle(dIcons);
   countMoves.innerHTML ="";
+  clearInterval('timer')
   let opCard = [];
   init();
 
