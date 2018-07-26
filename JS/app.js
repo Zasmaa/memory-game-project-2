@@ -27,7 +27,9 @@ dIcons = ["fa-diamond","fa-diamond",
 scorePanel = []
 matchedCard = [];
  opCard = [];
-moves = 0
+moves = 0;
+
+
 
 
  function init(){
@@ -40,17 +42,11 @@ let deck = document.querySelector('.deck');
 cards += `<li class ='card'><i class= 'fa ${card}'></i></li>`;
 deck.innerHTML = cards;
 }
+
  let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
-    // started timer 
-    let initialClick = false;
-if(initialClick=== false){
-  initialClick = true;
-  countTimer();
-}
-
 //opened card
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
@@ -60,16 +56,24 @@ if (!card.classList.contains('open') && !card.classList.contains('show') && !car
     //start counts moves 
      addMove();
      changeStars();
+     startTimer();
 
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
   opCard[0].classList.add('match');
   opCard[1].classList.add('match');
 matchedCard.push(opCard[0],opCard[1]);
+
 }
 
+
 // all cards matched
-isOver();
+gameOver();
+//
+// settimeout
+//
+
+
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
@@ -90,16 +94,16 @@ function addMove(){
   countMoves.innerHTML = moves;
 }
   //change stars
-  let rates= document.querySelector('.stars')
-  let listStarts = document.querySelectorAll('.fa fa-star')
+ let rates= document.querySelector('.stars')
+ // let listStarts = document.querySelectorAll('.fa fa-star')
   function changeStars(){
     if (moves > 4 && moves < 10){  
     document.getElementById('one').style.display = 'none'; 
 
     } 
 
-    else if (moves > 11 && moves < 20){
-      document.getElementById('two').style.display = 'none'; 
+   else if (moves > 11 && moves < 20){
+     document.getElementById('two').style.display = 'none'; 
     }
     else if ( moves > 35){
        document.getElementById('last').style.display = 'none'; 
@@ -107,52 +111,61 @@ function addMove(){
   } 
 
 // timer 
-  let vTimer = setInterval(countTimer, 1000);
-  let hours =0;
+let hours =0;
   let minutes =0;
   let seconds =0;
-  let time = document.querySelector('.timer');
+ function startTimer(){
   let initialClick = false;
+  let time = document.querySelector('.timer')
+   let timer = setInterval(countTimer, 1000);
+  
 function countTimer(){
    seconds++;
-   if(seconds ==60){
+   if(seconds == 60){
     minutes++;
     seconds =0;
    }
     document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;
    }
+
+ }
+
+// stop timer
  function stopTimer(){
-  let timer = document.querySelector('.timer')
-  clearInterval();    
+let time = document.querySelector('.timer')
+  clearInterval(time);    
 
    } 
-
-function isOver(){
+   // check if game is over
+function gameOver(){
   if (matchedCard.length === dIcons.length){
 
  swal({
   title: "Congratulations!",
-  text: 'do you want to play again ', 
+  text: ' You Won, do you want to play again ' + ' it took you ' + moves + ' moves ' + 'and the time it took you is  ' + hours + ":" + minutes + ":" + seconds + rates,
   icon: "success",
 });
-//clearInterval('timer'); 
-  stopTimer();
+ stopTimer();
 }
+
+//
+ let initialClick = false
+    if(initialClick=== false){
+  initialClick = true;
+  }
+
 }
+
 }
   
- init();
-
-
-
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(e){
- let cards = "";
-  const shuffleCard = shuffle(dIcons);
-  countMoves.innerHTML ="";
-  clearInterval('timer')
-  let opCard = [];
+
+  location.reload()
   init();
 
 
 });
+
+init();
+
