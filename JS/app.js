@@ -1,5 +1,6 @@
 
  
+ 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -69,11 +70,6 @@ matchedCard.push(opCard[0],opCard[1]);
 
 // all cards matched
 gameOver();
-//
-// settimeout
-//
-
-
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
