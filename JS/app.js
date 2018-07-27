@@ -62,25 +62,17 @@ matchedCard.push(opCard[0],opCard[1]);
 if(matchedCard.length==dIcons.length){
 gameOver();
 }
-
-
-//
-
-
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
                 card.classList.remove('open','show', 'disabled');
-
       });
-
           opCard = [];
     },1000);
   }
   });
 });
 }
-
 // count moves 
 countMoves= document.querySelector('.moves');
 moves=0
