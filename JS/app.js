@@ -1,6 +1,3 @@
-
- 
- 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -25,13 +22,10 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-anchor","fa-anchor", 
  "fa-cube","fa-cube",];
 
-scorePanel = []
+scorePanel = document.getElementsByClassName('score-panel')
 matchedCard = [];
  opCard = [];
 moves = 0;
-
-
-
 
  function init(){
    // shuffle cards
@@ -43,8 +37,7 @@ let deck = document.querySelector('.deck');
 cards += `<li class ='card'><i class= 'fa ${card}'></i></li>`;
 deck.innerHTML = cards;
 }
-
- let aCards = document.querySelectorAll('.card');
+let aCards = document.querySelectorAll('.card');
 let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
@@ -52,12 +45,10 @@ aCards.forEach(function(card){
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
       card.classList.add('open','show', 'disabled');
-    
   if (opCard.length == 2){
     //start counts moves 
-     addMove();
-     changeStars();
-     startTimer();
+    addMove();
+    changeStars();
 
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
@@ -67,9 +58,15 @@ matchedCard.push(opCard[0],opCard[1]);
 
 }
 
-
 // all cards matched
+if(matchedCard.length==dIcons.length){
 gameOver();
+}
+
+
+//
+
+
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
@@ -82,16 +79,46 @@ gameOver();
   }
   });
 });
-//count moves
+}
+
+// count moves 
 countMoves= document.querySelector('.moves');
-moves = 0;
+moves=0
 function addMove(){
   moves++;
   countMoves.innerHTML = moves;
+  if( moves==1){
+  hours=0;
+  minutes=0;
+  seconds=0;
+startTimer();
+
 }
-  //change stars
+}
+//timer
+let hours =0;
+let minutes=0;
+let seconds =0;
+let vtimer;
+
+function startTimer() {
+    vtimer = setInterval(countTimer, 1000);
+}
+
+function countTimer() {
+  seconds++;
+   if(seconds == 60){
+    minutes++;
+    seconds =0;
+   }
+    document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;  
+}
+// stop timer
+function stopTimer(){
+  clearInterval(vtimer);
+}
+//change stars
  let rates= document.querySelector('.stars')
- // let listStarts = document.querySelectorAll('.fa fa-star')
   function changeStars(){
     if (moves > 4 && moves < 10){  
     document.getElementById('one').style.display = 'none'; 
@@ -105,55 +132,17 @@ function addMove(){
        document.getElementById('last').style.display = 'none'; 
     }
   } 
-
-// timer 
-let hours =0;
-  let minutes =0;
-  let seconds =0;
- function startTimer(){
-  let initialClick = false;
-  let time = document.querySelector('.timer')
-   let timer = setInterval(countTimer, 1000);
-  
-function countTimer(){
-   seconds++;
-   if(seconds == 60){
-    minutes++;
-    seconds =0;
-   }
-    document.querySelector('.timer').innerHTML = hours + ":" + minutes + ":" + seconds;
-   }
-
- }
-
-// stop timer
- function stopTimer(){
-let time = document.querySelector('.timer')
-  clearInterval(time);    
-
-   } 
-   // check if game is over
+// game over
 function gameOver(){
-  if (matchedCard.length === dIcons.length){
-
  swal({
   title: "Congratulations!",
-  text: ' You Won, do you want to play again ' + ' it took you ' + moves + ' moves ' + 'and the time it took you is  ' + hours + ":" + minutes + ":" + seconds + rates,
+  text: ' You Won, do you want to play again ' + ' it took you ' + moves + ' moves ' + 'and the time it took you is  ' + hours + 'hours'+ ":" + minutes + 'minutes' + ":" + seconds + 'seconds'+ + '.'+ ' three stars equals exallent, two stars equals good and one stars equal need more practice. ',
   icon: "success",
 });
  stopTimer();
 }
 
-//
- let initialClick = false
-    if(initialClick=== false){
-  initialClick = true;
-  }
-
-}
-
-}
-  
+//restart Button
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(e){
 
@@ -163,5 +152,6 @@ restartButton.addEventListener('click', function(e){
 
 });
 
-init();
+// First stat of the game 
 
+init();
