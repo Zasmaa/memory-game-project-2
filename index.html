@@ -7,7 +7,7 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
 <link rel="stylesheet" href="css/app.css">
-    <script src="lib/easytimer/dist/easytimer.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -18,32 +18,22 @@
 
         <section class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li id="one"><i class="fa fa-star"></i></li>
+                <li id="two"><i class="fa fa-star"></i></li>
+                <li id="last"><i class="fa fa-star"></i></li>
         	</ul>
 
         	<span class="moves"></span> Moves
             <div class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
-            <div class='time'><div> 00:00
+            <!-- time -->
+            <divc class="timer"></div>
+
         </section>
 
         <ul class="deck"></ul>
     </div>
-             <section>
-    <div id='gameModal' class= 'modal'>
-    <div class= modal-body>
-        <span class="close">&times;</span>
-        <h2>Game Over</h2>
-        <span class= 'modal-timer'>timer</span>
-         <span class = 'modal-stars'> stars</span>
-        <span class = 'modal-moves'>moves</span>
-    </div>   
-    </div>
-        
-   </section>
 
     <script src="js/app.js"></script>
 </body>
