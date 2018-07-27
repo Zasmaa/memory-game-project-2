@@ -21,8 +21,6 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-bomb",  "fa-bomb", 
  "fa-anchor","fa-anchor", 
  "fa-cube","fa-cube",];
-
-scorePanel = document.getElementsByClassName('score-panel')
 matchedCard = [];
  opCard = [];
 moves = 0;
