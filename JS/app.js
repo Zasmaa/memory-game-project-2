@@ -43,9 +43,9 @@ aCards.forEach(function(card){
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
       card.classList.add('open','show', 'disabled');
+      addMove();
   if (opCard.length == 2){
     //start counts moves 
-    addMove();
     changeStars();
 
 //matched cards 
