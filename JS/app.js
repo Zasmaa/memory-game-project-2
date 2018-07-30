@@ -29,7 +29,7 @@ const starsContainer = document.querySelector('.stars');
 
  function init(){
    // shuffle cards
- const shuffleCard = shuffle(dIcons);
+ //const shuffleCard = shuffle(dIcons);
   //make cards 
   let cards = "";
  for (let card of dIcons){
@@ -42,44 +42,34 @@ let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
 //opened card
-if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
-      opCard.push(card);
+if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+opCard.push(card);
       card.classList.add('open','show', 'disabled');
-
-  if (opCard.length == 2){
-    //start counts moves 
-    addMove();
-    
-
-//matched cards 
-if (opCard[0].innerHTML == opCard[1].innerHTML){
-  opCard[0].classList.add('match');
-  opCard[1].classList.add('match');
-matchedCard.push(opCard[0],opCard[1]);
-
-}
-
-// all cards matched
-if(matchedCard.length==dIcons.length){
-gameOver();
-}
-
-
-//
-
-
-// hide if it not match 
+      if (opCard.length == 2) {
+        //start counts moves 
+           addMove();
+           //matched cards 
+      if (opCard[0].innerHTML == opCard[1].innerHTML) {
+       opCard[0].classList.add('match');
+       opCard[1].classList.add('match');
+       matchedCard.push(opCard[0],opCard[1]); 
+      }
+             // all cards matched
+      if (matchedCard.length==dIcons.length) {
+          gameOver();
+      }
+      // hide if it not match 
         setTimeout(function(){
-           opCard.forEach(function(card){
-                card.classList.remove('open','show', 'disabled');
-
-      });
-
-          opCard = [];
-    },2000);
-  }
+          opCard.forEach(function(card){
+            card.classList.remove('open','show', 'disabled');
+          });
+          opCard =[];
+        },1000)
+      }
+}
   });
 });
+
 }
 
 // count moves 
@@ -155,7 +145,7 @@ function gameOver(){
  // adding stars
  let allStars = document.getElementById('modal-stars');
  let stars= document.querySelector('.stars');
- allStars.innerHTML = `${starsContainer} stars`
+ allStars.innerHTML = changeStars
 
  // stoping time
  stopTimer();
