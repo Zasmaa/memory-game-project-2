@@ -21,9 +21,11 @@ dIcons = ["fa-diamond","fa-diamond",
  "fa-bomb",  "fa-bomb", 
  "fa-anchor","fa-anchor", 
  "fa-cube","fa-cube",];
+
 matchedCard = [];
  opCard = [];
 moves = 0;
+const starsContainer = document.querySelector('.stars');
 
  function init(){
    // shuffle cards
@@ -43,10 +45,11 @@ aCards.forEach(function(card){
 if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match'));
       opCard.push(card);
       card.classList.add('open','show', 'disabled');
-      addMove();
+
   if (opCard.length == 2){
     //start counts moves 
-    changeStars();
+    addMove();
+    
 
 //matched cards 
 if (opCard[0].innerHTML == opCard[1].innerHTML){
@@ -60,17 +63,25 @@ matchedCard.push(opCard[0],opCard[1]);
 if(matchedCard.length==dIcons.length){
 gameOver();
 }
+
+
+//
+
+
 // hide if it not match 
         setTimeout(function(){
            opCard.forEach(function(card){
                 card.classList.remove('open','show', 'disabled');
+
       });
+
           opCard = [];
-    },1000);
+    },2000);
   }
   });
 });
 }
+
 // count moves 
 countMoves= document.querySelector('.moves');
 moves=0
@@ -81,10 +92,27 @@ function addMove(){
   hours=0;
   minutes=0;
   seconds=0;
-startTimer();
+startTimer(); 
+}
+changeStars();
+}
+//change stars 
+let rates= document.querySelector('.stars')
+  function changeStars(){
+    if (moves > 4 && moves < 10){  
+    document.getElementById('one').style.display = 'none'; 
 
-}
-}
+    } 
+
+   else if (moves > 11 && moves < 20){
+     document.getElementById('two').style.display = 'none'; 
+    }
+    else if ( moves > 35){
+       document.getElementById('last').style.display = 'none'; 
+    }
+  } 
+
+
 //timer
 let hours =0;
 let minutes=0;
@@ -108,29 +136,45 @@ function stopTimer(){
   clearInterval(vtimer);
 }
 //change stars
- let rates= document.querySelector('.stars')
-  function changeStars(){
-    if (moves > 4 && moves < 10){  
-    document.getElementById('one').style.display = 'none'; 
-
-    } 
-
-   else if (moves > 11 && moves < 20){
-     document.getElementById('two').style.display = 'none'; 
-    }
-    else if ( moves > 35){
-       document.getElementById('last').style.display = 'none'; 
-    }
-  } 
+  
+  
 // game over
 function gameOver(){
- swal({
-  title: "Congratulations!",
-  text: ' You Won, do you want to play again ' + ' it took you ' + moves + ' moves ' + 'and the time it took you is  ' + hours + 'hours'+ ":" + minutes + 'minutes' + ":" + seconds + 'seconds'+ + '.'+ ' three stars equals exallent, two stars equals good and one stars equal need more practice. ',
-  icon: "success",
-});
+ //adding moves
+ let allMoves = document.getElementById('modal-moves');
+     allMoves.innerHTML =moves
+ // adding time
+ let allhours = document.getElementById('modal-hours');
+ let allminutes = document.getElementById('modal-minutes');
+ let allseconds = document.getElementById('modal-seconds');
+ allhours.innerHTML = hours
+ allminutes.innerHTML = minutes
+ allseconds.innerHTML = seconds
+
+
+ // adding stars
+ let allStars = document.getElementById('modal-stars');
+ let stars= document.querySelector('.stars');
+ allStars.innerHTML = `${starsContainer} stars`
+
+ // stoping time
  stopTimer();
+// displaying modal
+popupModal.style.display = 'block';
+// Play again button
+let playAgain = document.querySelector('.modal-btn-playAgain');
+playAgain.addEventListener('click', function(e){
+  location.reload()
+  init();
+});
+//cancel
+let Cancel =document.querySelector('.modal-btn-cancel');
+Cancel.addEventListener('click', function(e){
+  popupModal.style.display='none'
+})
+
 }
+
 
 //restart Button
 let restartButton = document.querySelector('.restart');
