@@ -31,6 +31,24 @@
             <divc class="timer"></div>
 
         </section>
+         <section>
+        <div id ='popupModal' class='modal'>
+            <div class= 'modal-content'></div>
+        <h1>Congratulations!</h1>
+        <span class="close">&times;</span>
+        <div>
+               <p> You won, do you want to play again! it took you <span id= 'modal-moves'></span> moves!</p> 
+               <p>and the time it took you is <span id= 'modal-hours'></span> : <span id='modal-minutes'></span> : <span id='modal-seconds'></span></p>
+               <p>last the stars rating <span id="modal-stars"></span></p>
+               <p> <span onclick= "document.getElementById('one').style.display='block'"></span> <span onclick="document.getElementById('one').style.display='block'"></span></p>
+
+        </div>
+          <div>
+            <button class= 'modal-btn-cancel'>Cancel</button>
+                <button class = ' modal-btn-playAgain'>Play Again </button>
+        </div>  
+        </div>
+    </section>
 
         <ul class="deck"></ul>
     </div>
