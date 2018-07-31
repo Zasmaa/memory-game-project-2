@@ -1,4 +1,3 @@
- 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -29,7 +28,7 @@ moves = 0;
 
  function init(){
    // shuffle cards
- //const shuffleCard = shuffle(dIcons);
+ const shuffleCard = shuffle(dIcons);
   //make cards 
   let cards = "";
  for (let card of dIcons){
@@ -67,19 +66,12 @@ opCard.push(card);
           opCard =[];
         },500)
         }
-          
-
-        
-
       }
 }
   });
 });
 
 }
-// add disabled to each card
-
-
 // count moves 
 countMoves= document.querySelector('.moves');
 moves=0
@@ -109,8 +101,6 @@ let stars= document.querySelector('.stars');
        document.getElementById('last').style.display = 'none'; 
     }
   } 
-
-
 //timer
 let hours =0;
 let minutes=0;
@@ -120,7 +110,6 @@ let vtimer;
 function startTimer() {
     vtimer = setInterval(countTimer, 1000);
 }
-
 function countTimer() {
   seconds++;
    if(seconds == 60){
@@ -132,10 +121,7 @@ function countTimer() {
 // stop timer
 function stopTimer(){
   clearInterval(vtimer);
-}
-//change stars
-  
-  
+}  
 // game over
 function gameOver(){
 
@@ -149,13 +135,10 @@ function gameOver(){
  allhours.innerHTML = hours
  allminutes.innerHTML = minutes
  allseconds.innerHTML = seconds
-
-
  // adding stars
  let allStars = document.getElementById('modal-stars');
 
- allStars.innerHTML = stars
-
+ allStars.innerHTML = stars.innerHTML
  // stoping time
  stopTimer();
 // displaying modal
@@ -171,10 +154,7 @@ let Cancel =document.querySelector('.modal-btn-cancel');
 Cancel.addEventListener('click', function(e){
   popupModal.style.display='none'
 })
-
 }
-
-
 //restart Button
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(e){
@@ -182,9 +162,6 @@ restartButton.addEventListener('click', function(e){
   location.reload()
   init();
 
-
 });
-
 // First stat of the game 
-
 init();
