@@ -26,6 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 h1 {
@@ -41,7 +42,7 @@ h1 {
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    padding: 35px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -49,19 +50,12 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
-    width: 570px;
-    justify-content: center;
-    align-content: center;
 
 }
 
 .deck .card {
     height: 125px;
-    width: 135px;
+    width: 125px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -91,6 +85,7 @@ h1 {
 .deck .card.disabled {
 pointer-events: none;
 }
+
 
 /*
  * Styles for the Score Panel
@@ -122,7 +117,13 @@ pointer-events: none;
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
-    position: relative; /* Stay in place */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -153,4 +154,3 @@ pointer-events: none;
     text-decoration: none;
     cursor: pointer;
 }
-
