@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
 <link rel="stylesheet" href="css/app.css">
@@ -33,22 +34,23 @@
         </section>
          <section>
         <div id ='popupModal' class='modal'>
-            <div class= 'modal-content'></div>
-        <h1>Congratulations!</h1>
-        <span class="close">&times;</span>
-        <div>
-               <p> You won, do you want to play again! it took you <span id= 'modal-moves'></span> moves!</p> 
-               <p>and the time it took you is <span id= 'modal-hours'></span> : <span id='modal-minutes'></span> : <span id='modal-seconds'></span></p>
-               <p>last the stars rating <span id="modal-stars"></span></p>
-               <p> <span onclick= "document.getElementById('one').style.display='block'"></span> <span onclick="document.getElementById('one').style.display='block'"></span></p>
-
-        </div>
-          <div>
-            <button class= 'modal-btn-cancel'>Cancel</button>
+            <div class= 'modal-content'>
+                <div class= 'modalHeader'>
+                    <h1>Congratulations!</h1> 
+                </div>
+                <div class= 'modalBody'>
+                    <p> You won, do you want to play again! it took you <span id= 'modal-moves'></span> moves!</p> 
+                    <p> and the time it took you is <span id= 'modal-hours'></span> : <span id='modal-minutes'></span> : <span id='modal-seconds'></span></p>
+                    <p> and your rating is <span id="modal-stars"></span></p> 
+                </div>
+                <div class='modalFooter'>
+                    <button class= 'modal-btn-cancel'>Cancel</button>
                 <button class = ' modal-btn-playAgain'>Play Again </button>
-        </div>  
+                </div>
+            </div> 
         </div>
     </section>
+    
 
         <ul class="deck"></ul>
     </div>
