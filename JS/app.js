@@ -1,3 +1,4 @@
+ 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -25,7 +26,6 @@ dIcons = ["fa-diamond","fa-diamond",
 matchedCard = [];
  opCard = [];
 moves = 0;
-const starsContainer = document.querySelector('.stars');
 
  function init(){
    // shuffle cards
@@ -42,7 +42,7 @@ let opCard = [];
 aCards.forEach(function(card){
   card.addEventListener('click', function(e){
 //opened card
-if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') && !opCard.length < 2) {
 opCard.push(card);
       card.classList.add('open','show', 'disabled');
       if (opCard.length == 2) {
@@ -59,18 +59,26 @@ opCard.push(card);
           gameOver();
       }
       // hide if it not match 
-        setTimeout(function(){
+        else{
+          setTimeout(function(){
           opCard.forEach(function(card){
             card.classList.remove('open','show', 'disabled');
           });
           opCard =[];
-        },1000)
+        },500)
+        }
+          
+
+        
+
       }
 }
   });
 });
 
 }
+// add disabled to each card
+
 
 // count moves 
 countMoves= document.querySelector('.moves');
@@ -87,7 +95,7 @@ startTimer();
 changeStars();
 }
 //change stars 
-let rates= document.querySelector('.stars')
+let stars= document.querySelector('.stars');
   function changeStars(){
     if (moves > 4 && moves < 10){  
     document.getElementById('one').style.display = 'none'; 
@@ -130,6 +138,7 @@ function stopTimer(){
   
 // game over
 function gameOver(){
+
  //adding moves
  let allMoves = document.getElementById('modal-moves');
      allMoves.innerHTML =moves
@@ -144,8 +153,8 @@ function gameOver(){
 
  // adding stars
  let allStars = document.getElementById('modal-stars');
- let stars= document.querySelector('.stars');
- allStars.innerHTML = changeStars
+
+ allStars.innerHTML = stars
 
  // stoping time
  stopTimer();
